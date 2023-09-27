@@ -1,5 +1,9 @@
 ---
 import AccountGen from '../components/AccountGen';
+import AbstractAddressGen from '../components/AbstractAddressGen.svelte';
+import { getAbstractAddress } from '../api'
+
 ---
 <p>Read more <a href="/login/">login</a> Astro!</p>
 <AccountGen client:load/>
+<AbstractAddressGen client:idle />

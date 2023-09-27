@@ -17,6 +17,10 @@ interface Cart {
 	}>;
 }
 
+export interface Address {
+	address: string;
+}
+
 function getOrigin(request: Request): string {
 	return new URL(request.url).origin.replace('localhost', '127.0.0.1');
 }
@@ -64,6 +68,20 @@ export async function getCart(incomingReq: Request): Promise<Cart> {
 		const cart: Cart = await response.json();
 		return cart;
 	});
+}
+
+export async function getAbstractAddress(): Promise<Address> {
+	const response = await fetch(`${location.origin}/api/abstractaddress`, {
+		credentials: 'same-origin',
+		method: 'GET',
+		mode: 'no-cors',
+		headers: {
+			'Content-Type': 'application/json',
+			Cache: 'no-cache',
+		},
+	});
+	const address: Address = await response.json();
+	return address;
 }
 
 export async function addToUserCart(id: number | string, name: string): Promise<void> {
